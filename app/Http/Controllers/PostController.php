@@ -37,16 +37,16 @@ class PostController extends Controller
         return Inertia::render('Post/Show', [
 			'image' => Storage::url('static/soon.svg'),
 			'keyword' => $request->input('keyword'),
-            'posts' => Post::where('name', 'like', '%' . $request->input('keyword') . '%')
-							->orderByDesc('updated_at')
-							->paginate(10)
-							->through(fn ($coin) => [
-								'id' => $coin->id,
-								'article' => $coin->article,
-								'user_id' => $coin->user_id,
-								'featured_photo_path' => $coin->featured_photo_path,
-								'featured_photo_url' => $coin->featured_photo_url,
-								'created_at' => $coin->created_at,
+            // 'posts' => Post::where('name', 'like', '%' . $request->input('keyword') . '%')
+			// 				->orderByDesc('updated_at')
+			// 				->paginate(10)
+			// 				->through(fn ($coin) => [
+			// 					'id' => $coin->id,
+			// 					'article' => $coin->article,
+			// 					'user_id' => $coin->user_id,
+			// 					'featured_photo_path' => $coin->featured_photo_path,
+			// 					'featured_photo_url' => $coin->featured_photo_url,
+			// 					'created_at' => $coin->created_at,
 							]),
         ]);
     }
