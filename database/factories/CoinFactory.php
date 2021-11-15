@@ -27,6 +27,7 @@ class CoinFactory extends Factory
         return [
 			'name' => $this->faker->word(),
 			'symbol'=> $this->faker->lexify(),
+			'description'=> $this->faker->sentence(),
 			'price' => $this->faker->randomFloat(),
 			'yesterday' => $this->faker->randomFloat(),
 			'capital' => $this->faker->randomNumber(5, false),

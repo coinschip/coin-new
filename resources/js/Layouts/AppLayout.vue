@@ -28,7 +28,7 @@
                                 <jet-nav-link :href="route('coin.add')" :active="route().current('coin.add')">
                                     Promote
                                 </jet-nav-link>
-                                <jet-nav-link :href="route('coin.add')" :active="route().current('coin.add')">
+                                <jet-nav-link :href="route('newsletter.list')" :active="route().current('newsletter.list')">
                                     Newsletter
                                 </jet-nav-link>
                             </div>
@@ -160,7 +160,7 @@
                         <jet-responsive-nav-link :href="route('coin.add')" :active="route().current('coin.add')">
                             Promote
                         </jet-responsive-nav-link>
-                        <jet-responsive-nav-link :href="route('coin.add')" :active="route().current('coin.add')">
+                        <jet-responsive-nav-link :href="route('newsletter.list')" :active="route().current('newsletter.list')">
                             Newsletter
                         </jet-responsive-nav-link>
                     </div>

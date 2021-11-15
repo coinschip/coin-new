@@ -14,6 +14,14 @@ class Coin extends Model
 	use SoftDeletes;
 
 	/**
+	 * Get the customer's product.
+	 */
+	public function votes()
+	{
+		return $this->hasMany(CoinVote::class);
+	}
+
+	/**
      * The attributes that are mass assignable.
      *
      * @var string[]
@@ -21,6 +29,7 @@ class Coin extends Model
     protected $fillable = [
 		'name',
 		'symbol',
+		'description',
 		'price',
 		'yesterday',
 		'capital',

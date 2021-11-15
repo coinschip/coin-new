@@ -17,6 +17,7 @@ class CreateCoinsTable extends Migration
             $table->id();
 			$table->text('name');
 			$table->text('symbol');
+			$table->text('description');
 			$table->decimal('price', $precision = 8, $scale = 2);
 			$table->decimal('yesterday', $precision = 8, $scale = 2); // Should periodically update
 			$table->unsignedBigInteger('capital');

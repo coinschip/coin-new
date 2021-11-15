@@ -2,6 +2,8 @@
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CoinController;
+use App\Http\Controllers\PostController;
 use Inertia\Inertia;
 
 /*
@@ -25,53 +27,29 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-	Route::get('/dashboard', function () {
-	    return Inertia::render('Coin/Show', [
-			'coins' => [
-				[
-					'logo' => null,
-					'name' => 'Bitcoin',
-					'symbol' => 'BTC',
-					'price' => 0.1,
-					'yesterday' => 0.004,
-					'capital' => 1000000,
-					'launched' => '10/20/2020',
-				],
-				[
-					'logo' => null,
-					'name' => 'Doge',
-					'symbol' => 'DOGE',
-					'price' => 5,
-					'yesterday' => 2.5,
-					'capital' => 1000000,
-					'launched' => '10/20/2020',
-				],
-				[
-					'logo' => null,
-					'name' => 'BitTorrent Token',
-					'symbol' => 'BTT',
-					'price' => 5,
-					'yesterday' => 10,
-					'capital' => 1000000,
-					'launched' => '10/20/2020',
-				]
-			]
-		]);
-	})->name('dashboard');
+	Route::get('/dashboard', [CoinController::class, 'show'])->name('dashboard');
 
 	Route::name('coin.')->group(function () {
 		Route::prefix('coin')->group(function () {
-			Route::get('/', function () {
-			    return Inertia::render('Coin/Show');
-			})->name('list');
+			Route::get('/{id}/detail', [CoinController::class, 'detailView'])->name('detail');
 
-			Route::get('/add', function () {
-			    return Inertia::render('Coin/Create');
-			})->name('add');
+			Route::get('/add', [CoinController::class, 'createView'])->name('add');
 
-			Route::post('/add', function () {
-			    return Inertia::render('Dashboard');
-			})->name('add');
+			Route::post('/add', [CoinController::class, 'create'])->name('add');
+
+			Route::post('/{id}/vote', [CoinController::class, 'vote'])->name('vote');
+		});
+	});
+
+	Route::name('newsletter.')->group(function () {
+		Route::prefix('newsletter')->group(function () {
+			Route::get('/', [PostController::class, 'show'])->name('list');
+
+			Route::get('/newsletter/{id}', [PostController::class, 'detailView'])->name('detail');
+
+			// Route::get('/add', [CoinController::class, 'createView'])->name('add');
+			//
+			// Route::post('/add', [CoinController::class, 'create'])->name('add');
 		});
 	});
 });
