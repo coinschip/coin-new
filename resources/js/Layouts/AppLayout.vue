@@ -40,7 +40,7 @@
 								<span v-if="!$page.props.user" class="inline-flex rounded-md">
 									<Link :href="route('register')">
 										<button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
-											Register
+											Login/Register
 										</button>
 									</Link>
 								</span>
@@ -127,7 +127,7 @@
                         </div>
 
                         <div class="mt-3 space-y-1">
-                            <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
+                            <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')" v-if="$page.props.user">
                                 Profile
                             </jet-responsive-nav-link>
 
@@ -141,6 +141,10 @@
                                     Log Out
                                 </jet-responsive-nav-link>
                             </form>
+
+							<jet-responsive-nav-link v-else :href="route('register')">
+								Login/Register
+							</jet-responsive-nav-link>
                         </div>
                     </div>
                 </div>
