@@ -47,7 +47,7 @@ class PostController extends Controller
 			// 					'featured_photo_path' => $coin->featured_photo_path,
 			// 					'featured_photo_url' => $coin->featured_photo_url,
 			// 					'created_at' => $coin->created_at,
-							]),
+							// ]),
         ]);
     }
 
