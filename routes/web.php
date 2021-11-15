@@ -21,6 +21,8 @@ Route::get('/', [CoinController::class, 'show']);
 
 Route::get('/home', [CoinController::class, 'show'])->name('dashboard');
 
+Route::get('/dashboard', [CoinController::class, 'show'])->name('dash');
+
 Route::name('newsletter.')->group(function () {
 	Route::prefix('newsletter')->group(function () {
 		Route::get('/', [PostController::class, 'show'])->name('list');
@@ -46,7 +48,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 		Route::prefix('coin')->group(function () {
 			Route::get('/add', [CoinController::class, 'createView'])->name('add');
 
-			Route::post('/add', [CoinController::class, 'create'])->name('add');	
+			Route::post('/add', [CoinController::class, 'create'])->name('add');
 		});
 	});
 });
