@@ -17,39 +17,36 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+Route::get('/', [CoinController::class, 'show']);
+
+Route::get('/home', [CoinController::class, 'show'])->name('dashboard');
+
+Route::name('newsletter.')->group(function () {
+	Route::prefix('newsletter')->group(function () {
+		Route::get('/', [PostController::class, 'show'])->name('list');
+
+		Route::get('/newsletter/{id}', [PostController::class, 'detailView'])->name('detail');
+
+		// Route::get('/add', [CoinController::class, 'createView'])->name('add');
+		//
+		// Route::post('/add', [CoinController::class, 'create'])->name('add');
+	});
+});
+
+Route::name('coin.')->group(function () {
+	Route::prefix('coin')->group(function () {
+		Route::get('/{id}/detail', [CoinController::class, 'detailView'])->name('detail');
+
+		Route::post('/{id}/vote', [CoinController::class, 'vote'])->name('vote');
+	});
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-	Route::get('/dashboard', [CoinController::class, 'show'])->name('dashboard');
-
 	Route::name('coin.')->group(function () {
 		Route::prefix('coin')->group(function () {
-			Route::get('/{id}/detail', [CoinController::class, 'detailView'])->name('detail');
-
 			Route::get('/add', [CoinController::class, 'createView'])->name('add');
 
-			Route::post('/add', [CoinController::class, 'create'])->name('add');
-
-			Route::post('/{id}/vote', [CoinController::class, 'vote'])->name('vote');
-		});
-	});
-
-	Route::name('newsletter.')->group(function () {
-		Route::prefix('newsletter')->group(function () {
-			Route::get('/', [PostController::class, 'show'])->name('list');
-
-			Route::get('/newsletter/{id}', [PostController::class, 'detailView'])->name('detail');
-
-			// Route::get('/add', [CoinController::class, 'createView'])->name('add');
-			//
-			// Route::post('/add', [CoinController::class, 'create'])->name('add');
+			Route::post('/add', [CoinController::class, 'create'])->name('add');	
 		});
 	});
 });

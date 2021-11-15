@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Models\Coin;
 use App\Models\CoinVote;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
@@ -187,9 +188,15 @@ class CoinController extends Controller
      */
     public function vote(Request $request, $id)
     {
+		if (Auth::check()) {
+			$user = $request->user()->getAuthIdentifier();
+		} else {
+			$user = 'GUEST' . rand(0, 10);
+		}
+
 		CoinVote::firstOrCreate([
 			'coin_id' => $id,
-			'user_id' => $request->user()->getAuthIdentifier(),
+			'user_id' => $user,
 			'ip_address' => $request->ip,
 			'user_agent' => $request->user_agent,
 		]);
