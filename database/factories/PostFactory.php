@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
 
-class CoinFactory extends Factory
+class PostFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Coin::class;
+    protected $model = Post::class;
 
     /**
      * Define the model's default state.
@@ -25,7 +25,7 @@ class CoinFactory extends Factory
     public function definition()
     {
         return [
-			'user_id' => User::all()->random()->id,,
+			'user_id' => User::all()->random()->id,
 			'article' => $this->faker->paragraphs(5, true),
         ];
     }

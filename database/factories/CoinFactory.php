@@ -29,7 +29,7 @@ class CoinFactory extends Factory
 			'symbol'=> $this->faker->lexify(),
 			'price' => $this->faker->randomFloat(),
 			'yesterday' => $this->faker->randomFloat(),
-			'capital' => $this->faker->randomNumber(10, false),
+			'capital' => $this->faker->randomNumber(5, false),
 			'launched_at' => $this->faker->dateTimeThisYear('+6 months'),
 			'user_id' => User::all()->random()->id,
         ];

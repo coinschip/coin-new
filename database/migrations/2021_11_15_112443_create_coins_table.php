@@ -14,14 +14,14 @@ class CreateCoinsTable extends Migration
     public function up()
     {
         Schema::create('coins', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->id();
 			$table->text('name');
 			$table->text('symbol');
 			$table->decimal('price', $precision = 8, $scale = 2);
 			$table->decimal('yesterday', $precision = 8, $scale = 2); // Should periodically update
 			$table->unsignedBigInteger('capital');
 			$table->timestamp('launched_at');
-			$table->foreignUuid('user_id');
+			$table->foreignId('user_id');
 			$table->string('logo_path', 2048)->nullable();
             $table->timestamps();
 			$table->softDeletes();

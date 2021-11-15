@@ -15,8 +15,8 @@ class CreateCoinVotesTable extends Migration
     {
         Schema::create('coin_votes', function (Blueprint $table) {
             $table->bigIncrements('id');
-			$table->foreignUuid('coin_id');
-			$table->foreignUuid('user_id')->nullable();
+			$table->foreignId('coin_id');
+			$table->foreignId('user_id')->nullable();
 			$table->string('ip_address', 45)->nullable();
 			$table->text('user_agent')->nullable();
             $table->timestamps();
