@@ -191,7 +191,7 @@ class CoinController extends Controller
 		if (Auth::check()) {
 			$user = $request->user()->getAuthIdentifier();
 		} else {
-			$user = 'GUEST' . rand(0, 10);
+			$user = null;
 		}
 
 		CoinVote::firstOrCreate([
