@@ -20,6 +20,12 @@ composer install
 
 npm install
 
+# Setup
+
+php artisan key:generate
+
+php artisan migrate
+
 # Development Preview
 
 php artisan ser
