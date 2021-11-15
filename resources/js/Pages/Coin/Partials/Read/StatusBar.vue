@@ -1,16 +1,33 @@
 <template>
 	<span :class="color">
-		{{ message }}
+		<TrendingUpIcon v-if="updown" class="h-5 w-5"/>
+
+		<TrendingDownIcon v-if="!updown" class="h-5 w-5"/>
+
+		<span class="ml-2">{{ rate }}</span>
 	</span>
 </template>
 
 <script>
     import { defineComponent } from 'vue'
 
+	import { TrendingUpIcon, TrendingDownIcon } from '@heroicons/vue/solid'
+
     export default defineComponent({
-        props: ['code'],
+		components: {
+			TrendingUpIcon,
+			TrendingDownIcon,
+		},
+
+        props: [
+			'today',
+			'yesterday',
+		],
 
         computed: {
+			updown() {
+				return (this.today > this.yesterday)
+			},
             color() {
 				const statusColor = [
 					'bg-gray-100 text-gray-800', // Pending
@@ -20,7 +37,9 @@
 					'bg-red-100 text-red-800', // Expired
 				]
 
-                return 'px-2 inline-flex text-xs leading-5 font-semibold rounded-full ' + statusColor[this.code]
+				let code = (this.today > this.yesterday) ? 1 : 4
+
+                return 'px-2 inline-flex text-xs leading-5 font-semibold rounded-full ' + statusColor[code]
             },
 			message() {
 				const statusText = [
@@ -32,7 +51,12 @@
 				]
 
 				return statusText[this.code]
-			}
+			},
+			rate() {
+				let rate = this.today / this.yesterday
+
+				return (rate * 100) + '%'
+			},
         }
     })
 </script>

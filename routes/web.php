@@ -36,6 +36,24 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 					'yesterday' => 0.004,
 					'capital' => 1000000,
 					'launched' => '10/20/2020',
+				],
+				[
+					'logo' => null,
+					'name' => 'Doge',
+					'symbol' => 'DOGE',
+					'price' => 5,
+					'yesterday' => 2.5,
+					'capital' => 1000000,
+					'launched' => '10/20/2020',
+				],
+				[
+					'logo' => null,
+					'name' => 'BitTorrent Token',
+					'symbol' => 'BTT',
+					'price' => 5,
+					'yesterday' => 10,
+					'capital' => 1000000,
+					'launched' => '10/20/2020',
 				]
 			]
 		]);

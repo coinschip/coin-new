@@ -54,11 +54,7 @@
 								</td>
 
 								<td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
-									{{
-										formatCurrency(
-											currency.yesterday
-										)
-									}}
+									<status-bar :today="currency.price" :yesterday="currency.yesterday">{{ currency.yesterday }}</status-bar>
 								</td>
 
 								<td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
@@ -119,14 +115,10 @@
 
 				return formatter.format(price)
 			},
-			calculatePrice(items) {
-				let total = []
+			calculatePrice(today, yesterday) {
+				let rate = today / yesterday
 
-				Object.entries(items).forEach(([key, v]) => {
-					total.push(Number(v.price * v.quantity))
-				})
-
-				return total.reduce( function (x, y) { return x + y }, 0 )
+				return rate * 100
 			},
 		},
 		mounted() {
